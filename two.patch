@@ -1,0 +1,262 @@
+Index: pkg01/oy/v6.1_6.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pkg01/oy/v6.1_6.py	(date 1559380210355)
++++ pkg01/oy/v6.1_6.py	(date 1559380210355)
+@@ -0,0 +1,32 @@
++from email.mime.text import MIMEText
++from email.mime.multipart import MIMEBase,MIMEMultipart
++import smtplib
++from email.header import Header
++mail_mul = MIMEMultipart()
++mail_text = MIMEText("i like hacker","plain","utf-8")
++head_from = Header("阳祥伟发的","utf-8")
++mail_text["From"] = head_from
++head_to = Header("去他的",'utf-8')
++mail_text["To"] = head_to
++head_sub = Header("这是主题，辞职","utf-8")
++mail_text["Subject"] = head_sub
++mail_mul.attach(mail_text)
++
++with open("student.xhtml","rb")as f:
++    s = f.read()
++    m = MIMEText(s,"base64","utf-8")
++    m["Content-Type"] = "application/octet-stream"
++    m["Content-Disposition"] = "attachment:filenname ='student.xhtml'"
++    mail_mul.attach(m)
++
++from_addr = "992543768@qq.com"
++from_pwd = "inbrlvqdrxwnbbcj"
++to_addr = "992543768@qq.com"
++smtp_srv = "smtp.qq.com"
++try:
++    srv = smtplib.SMTP_SSL(smtp_srv.encode(),465)
++    srv.login(from_addr,from_pwd)
++    srv.sendmail(from_addr,to_addr,mail_mul.as_string())
++    srv.quit()
++except Exception as e:
++    print(e)
+\ No newline at end of file
+Index: pkg01/oy/v6.1_8.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pkg01/oy/v6.1_8.py	(date 1559381559599)
++++ pkg01/oy/v6.1_8.py	(date 1559381559599)
+@@ -0,0 +1,45 @@
++from email.mime.text import MIMEText
++from email.mime.multipart import MIMEMultipart
++msg = MIMEMultipart("alternative")
++mail_content = """
++        <?xml version="1.0" encoding="UTF-8"?>
++        <!DOCTYPE html
++                PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
++                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
++        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
++        <head>
++            <title>student</title>
++        </head>
++        <body>
++            <school>
++
++                <div>
++                    <studnt>
++                        <name> Anonymous</name>
++                        <age> 41</age>
++                        <score>math:&gt;70</score>
++                    </studnt>
++                </div>
++
++            </school>
++        </body>
++        </html>
++
++"""
++msg_html = MIMEText(mail_content, "html", "utf-8")
++from_addr = "992543768@qq.com"
++from_pwd = "inbrlvqdrxwnbbcj"
++to_addr = "992543768@qq.com"
++smtp_srv = "smtp.qq.com"
++msg.attach(msg_html)
++msg_text = MIMEText("just text context","plain","utf-8")
++msg.attach(msg_text)
++
++import smtplib
++try:
++    sev = smtplib.SMTP_SSL(smtp_srv.encode(),465)
++    sev.login(from_addr,from_pwd)
++    sev.sendmail(from_addr,to_addr,msg.as_string())
++    sev.quit()
++except Exception as e:
++    print(e)
+\ No newline at end of file
+Index: pkg01/oy/v6.1_7.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pkg01/oy/v6.1_7.py	(date 1559380378813)
++++ pkg01/oy/v6.1_7.py	(date 1559380378813)
+@@ -0,0 +1,23 @@
++from email.mime.text import MIMEText
++from email.mime.multipart import MIMEBase,MIMEMultipart
++import smtplib
++from email.header import Header
++
++mail_text = MIMEText("i like hacker","plain","utf-8")
++head_from = Header("阳祥伟发的","utf-8")
++mail_text["From"] = head_from
++head_to = Header("去他的",'utf-8')
++mail_text["To"] = head_to
++head_sub = Header("这是主题，辞职","utf-8")
++mail_text["Subject"] = head_sub
++
++from_addr = "992543768@qq.com"
++from_pwd = "inbrlvqdrxwnbbcj"
++to_addr = "992543768@qq.com"
++smtp_srv = "smtp.qq.com"
++try:
++    srv = smtplib.SMTP_SSL(smtp_srv.encode(),465)
++    srv.login(from_addr,from_pwd)
++    srv.sendmail(from_addr,to_addr,mail_text.as_string())
++except Exception as e:
++    print(e)
+\ No newline at end of file
+Index: pkg01/oy/v6.1_2.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pkg01/oy/v6.1_2.py	(date 1559375256477)
++++ pkg01/oy/v6.1_2.py	(date 1559375256477)
+@@ -0,0 +1,12 @@
++import socket
++def tcp_clt():
++    sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
++    addr = ("127.0.0.1",8998)
++    sock.connect(addr)
++    msg = "i love you"
++    sock.send(msg.encode())
++    rst = sock.recv(500)
++    print(rst.decode())
++    sock.close()
++if __name__ =="__main__":
++    tcp_clt()
+\ No newline at end of file
+Index: pkg01/oy/v6.1_3.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pkg01/oy/v6.1_3.py	(date 1559376124660)
++++ pkg01/oy/v6.1_3.py	(date 1559376124660)
+@@ -0,0 +1,34 @@
++import socket
++import ftplib
++import os
++HOST = "ftp.acc.umu.se"
++DIR = "Public/EFLIB/"
++FILE = "README"
++try:
++    f = ftplib.FTP()
++    f.set_debuglevel(2)
++    f.connect(HOST)
++except Exception as e:
++    print(e)
++    exit()
++print("connected to host{0}".format(HOST))
++try:
++    f.login()
++except Exception as e:
++    print(e)
++    exit()
++print("logged in as Anonymous")
++
++try:
++    f.cwd(DIR)
++except Exception as e:
++    print(e)
++    exit()
++print("changed dir to {0}".format(DIR))
++
++try:
++    f.retrbinary("RETR{0}".format(FILE),open(FILE,"wb").write)
++except Exception as e:
++    print(e)
++    exit()
++f.quit()
+\ No newline at end of file
+Index: pkg01/oy/v6.1_5.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pkg01/oy/v6.1_5.py	(date 1559378207054)
++++ pkg01/oy/v6.1_5.py	(date 1559378207054)
+@@ -0,0 +1,39 @@
++import smtplib
++from email.mime.text import MIMEText
++mail_content = """
++        <?xml version="1.0" encoding="UTF-8"?>
++        <!DOCTYPE html
++                PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
++                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
++        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
++        <head>
++            <title>student</title>
++        </head>
++        <body>
++            <school>
++
++                <div>
++                    <studnt>
++                        <name> Anonymous</name>
++                        <age> 41</age>
++                        <score>math:&gt;70</score>
++                    </studnt>
++                </div>
++
++            </school>
++        </body>
++        </html>
++                
++"""
++msg = MIMEText(mail_content,"html","utf-8")
++from_addr = "992543768@qq.com"
++from_pwd = "inbrlvqdrxwnbbcj"
++to_addr = "992543768@qq.com"
++smtp_srv = "smtp.qq.com"
++try:
++    srv = smtplib.SMTP_SSL(smtp_srv.encode(),465)
++    srv.login(from_addr,from_pwd)
++    srv.sendmail(from_addr,to_addr,msg.as_string())
++    srv.quit()
++except Exception as e:
++    print(e)
+\ No newline at end of file
+Index: pkg01/oy/v6.1_4.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pkg01/oy/v6.1_4.py	(date 1559377303075)
++++ pkg01/oy/v6.1_4.py	(date 1559377303075)
+@@ -0,0 +1,14 @@
++import smtplib
++from email.mime.text import MIMEText
++msg = MIMEText("i ma a hacker","plain","utf-8")
++from_addr = "992543768@qq.com"
++from_pwd = "inbrlvqdrxwnbbcj"
++to_addr = "992543768@qq.com"
++smtp_srv = "smtp.qq.com"
++try:
++    srv=smtplib.SMTP_SSL(smtp_srv.encode(),465)
++    srv.login(from_addr,from_pwd)
++    srv.sendmail(from_addr,to_addr,msg.as_string())
++    srv.quit()
++except Exception as e:
++    print(e)
+\ No newline at end of file
